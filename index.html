@@ -61,6 +61,70 @@
       <h2>A. Funktsionaalsed alustõed (a_basics.py)</h2>
       <p>Üldine juhend: vaata funktsioone ja kirjuta teste, et kontrollida nende õigsust. 
       Mõned funktsioonid võivad olla vigased - sinu testid peaksid need leidma!</p>
+      
+      <h3>Proovi funktsioone siin:</h3>
+      <div class="interactive-demo">
+        <div class="function-test">
+          <h4>add(2, 3)</h4>
+          <button onclick="testAdd()">Testi</button>
+          <div id="add-result" class="result"></div>
+        </div>
+        
+        <div class="function-test">
+          <h4>sub(10, 7)</h4>
+          <button onclick="testSub()">Testi</button>
+          <div id="sub-result" class="result"></div>
+        </div>
+        
+        <div class="function-test">
+          <h4>mul(4, 5)</h4>
+          <button onclick="testMul()">Testi</button>
+          <div id="mul-result" class="result"></div>
+        </div>
+        
+        <div class="function-test">
+          <h4>factorial(5)</h4>
+          <button onclick="testFactorial()">Testi</button>
+          <div id="factorial-result" class="result"></div>
+        </div>
+        
+        <div class="function-test">
+          <h4>reverse_string("hello")</h4>
+          <button onclick="testReverseString()">Testi</button>
+          <div id="reverse-string-result" class="result"></div>
+        </div>
+        
+        <div class="function-test">
+          <h4>is_palindrome("racecar")</h4>
+          <button onclick="testIsPalindrome()">Testi</button>
+          <div id="is-palindrome-result" class="result"></div>
+        </div>
+        
+        <div class="function-test">
+          <h4>clamp(15, 0, 10)</h4>
+          <button onclick="testClamp()">Testi</button>
+          <div id="clamp-result" class="result"></div>
+        </div>
+        
+        <div class="function-test">
+          <h4>median([1, 3, 2, 5, 4])</h4>
+          <button onclick="testMedian()">Testi</button>
+          <div id="median-result" class="result"></div>
+        </div>
+        
+        <div class="function-test">
+          <h4>safe_int("123", 0)</h4>
+          <button onclick="testSafeInt()">Testi</button>
+          <div id="safe-int-result" class="result"></div>
+        </div>
+        
+        <div class="function-test">
+          <h4>nth_root(8, 3)</h4>
+          <button onclick="testNthRoot()">Testi</button>
+          <div id="nth-root-result" class="result"></div>
+        </div>
+      </div>
+      
       <h3>Näide testist</h3>
       <pre><code># Näide (liitmise test)
 def test_add_basic():
@@ -154,6 +218,59 @@ def test_account_withdraw_overdraft():
   </main>
 
   <script>
+    function add(a, b) {
+      return a + b;
+    }
+    
+    function sub(a, b) {
+      return a - b; 
+    }
+    
+    function mul(a, b) {
+      return a * b;
+    }
+    
+    function factorial(n) {
+      if (n < 0) throw new Error("Negatiivse arvu faktoriaal ei ole defineeritud");
+      if (n === 0) return 1;
+      return n * factorial(n - 1);
+    }
+    
+    function reverse_string(s) {
+      return s.split('').reverse().join('');
+    }
+    
+    function is_palindrome(s) {
+      let rev = s.split("").reverse().join("");
+      return s === rev;
+    }
+    
+    function clamp(x, lo, hi) {
+      return Math.max(lo, Math.min(x, hi));
+    }
+    
+    function median(nums) {
+      if (nums.length === 0) throw new Error("Tühja loendi mediaan ei ole defineeritud");
+      const sorted = nums.slice().sort((a, b) => a - b);
+      const n = sorted.length;
+      if (n % 2 === 1) {
+        return sorted[Math.floor(n / 2)];
+      } else {
+        return (sorted[n / 2 - 1] + sorted[n / 2]) / 2;
+      }
+    }
+    
+    function safe_int(s, defaultValue = null) {
+      const parsed = parseInt(s);
+      return isNaN(parsed) ? defaultValue : parsed;
+    }
+    
+    function nth_root(x, n) {
+      if (n <= 0) throw new Error("Ainult positiivsed juured on lubatud");
+      if (x < 0 && n % 2 === 0) throw new Error("Paaris juur negatiivsest arvust ei ole defineeritud");
+      return Math.pow(x, 1 / n);
+    }
+    
     // B-OSA FUNKTSIOONID (mõned vigased)
     
     function unique_sorted(nums) {
@@ -219,6 +336,130 @@ def test_account_withdraw_overdraft():
       element.className = `result ${isPass ? 'pass' : 'fail'}`;
       element.textContent = message;
     }
+    
+    // A-OSA TESTID
+    
+    function testAdd() {
+      try {
+        const result = add(2, 3);
+        const expected = 5;
+        const isCorrect = result === expected;
+        showResult('add-result', isCorrect, 
+          `Tulemus: ${result} | Oodatud: ${expected} | ${isCorrect ? 'PASS' : 'FAIL'}`);
+      } catch (error) {
+        showResult('add-result', false, `VIGA: ${error.message}`);
+      }
+    }
+    
+    function testSub() {
+      try {
+        const result = sub(10, 7);
+        const expected = 3;
+        const isCorrect = result === expected;
+        showResult('sub-result', isCorrect, 
+          `Tulemus: ${result} | Oodatud: ${expected} | ${isCorrect ? 'PASS' : 'FAIL'}`);
+      } catch (error) {
+        showResult('sub-result', false, `VIGA: ${error.message}`);
+      }
+    }
+    
+    function testMul() {
+      try {
+        const result = mul(4, 5);
+        const expected = 20;
+        const isCorrect = result === expected;
+        showResult('mul-result', isCorrect, 
+          `Tulemus: ${result} | Oodatud: ${expected} | ${isCorrect ? 'PASS' : 'FAIL'}`);
+      } catch (error) {
+        showResult('mul-result', false, `VIGA: ${error.message}`);
+      }
+    }
+    
+    function testFactorial() {
+      try {
+        const result = factorial(5);
+        const expected = 120;
+        const isCorrect = result === expected;
+        showResult('factorial-result', isCorrect, 
+          `Tulemus: ${result} | Oodatud: ${expected} | ${isCorrect ? 'PASS' : 'FAIL'}`);
+      } catch (error) {
+        showResult('factorial-result', false, `VIGA: ${error.message}`);
+      }
+    }
+    
+    function testReverseString() {
+      try {
+        const result = reverse_string("hello");
+        const expected = "olleh";
+        const isCorrect = result === expected;
+        showResult('reverse-string-result', isCorrect, 
+          `Tulemus: "${result}" | Oodatud: "${expected}" | ${isCorrect ? 'PASS' : 'FAIL'}`);
+      } catch (error) {
+        showResult('reverse-string-result', false, `VIGA: ${error.message}`);
+      }
+    }
+    
+    function testIsPalindrome() {
+      try {
+        const result = is_palindrome("racecar");
+        const expected = true;
+        const isCorrect = result === expected;
+        showResult('is-palindrome-result', isCorrect, 
+          `Tulemus: ${result} | Oodatud: ${expected} | ${isCorrect ? 'PASS' : 'FAIL'}`);
+      } catch (error) {
+        showResult('is-palindrome-result', false, `VIGA: ${error.message}`);
+      }
+    }
+    
+    function testClamp() {
+      try {
+        const result = clamp(15, 0, 10);
+        const expected = 10;
+        const isCorrect = result === expected;
+        showResult('clamp-result', isCorrect, 
+          `Tulemus: ${result} | Oodatud: ${expected} | ${isCorrect ? 'PASS' : 'FAIL'}`);
+      } catch (error) {
+        showResult('clamp-result', false, `VIGA: ${error.message}`);
+      }
+    }
+    
+    function testMedian() {
+      try {
+        const result = median([1, 3, 2, 5, 4]);
+        const expected = 3;
+        const isCorrect = result === expected;
+        showResult('median-result', isCorrect, 
+          `Tulemus: ${result} | Oodatud: ${expected} | ${isCorrect ? 'PASS' : 'FAIL'}`);
+      } catch (error) {
+        showResult('median-result', false, `VIGA: ${error.message}`);
+      }
+    }
+    
+    function testSafeInt() {
+      try {
+        const result = safe_int("123", 0);
+        const expected = 123;
+        const isCorrect = result === expected;
+        showResult('safe-int-result', isCorrect, 
+          `Tulemus: ${result} | Oodatud: ${expected} | ${isCorrect ? 'PASS' : 'FAIL'}`);
+      } catch (error) {
+        showResult('safe-int-result', false, `VIGA: ${error.message}`);
+      }
+    }
+    
+    function testNthRoot() {
+      try {
+        const result = nth_root(8, 3);
+        const expected = 2;
+        const isCorrect = Math.abs(result - expected) < 0.001;
+        showResult('nth-root-result', isCorrect, 
+          `Tulemus: ${result.toFixed(3)} | Oodatud: ${expected} | ${isCorrect ? 'PASS' : 'FAIL'}`);
+      } catch (error) {
+        showResult('nth-root-result', false, `VIGA: ${error.message}`);
+      }
+    }
+    
+    // B-OSA TESTID
     
     function testUniqueSorted() {
       try {
