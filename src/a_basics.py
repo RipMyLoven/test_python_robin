@@ -7,7 +7,7 @@ def add(a, b):
 
 def sub(a, b):
     """Tagasta a-b."""
-    return a + b 
+    return a - b
 
 def mul(a, b):
     """Tagasta a*b."""
@@ -42,7 +42,9 @@ def reverse_string(s):
 
 def is_palindrome(s):
     """Tagasta True kui s on palindroom (tühikud/teksti suurus ei loe)."""
-    return s == s[::-1]
+    # Удаляем пробелы и приводим к нижнему регистру
+    cleaned = s.replace(" ", "").lower()
+    return cleaned == cleaned[::-1]
 
 def to_title_case(s):
     """Tagasta sõne, kus iga sõna algab suure tähega."""

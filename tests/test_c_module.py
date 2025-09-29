@@ -12,7 +12,9 @@ def test_fibonacci_small():
 def test_prime_factors_basic():
     """Test algtegurite leidmist."""
     assert prime_factors(12) == [2,2,3]
-    assert prime_factors(97) == [97]def test_bankaccount():
+    assert prime_factors(97) == [97]
+    
+def test_bankaccount():
     acc1 = BankAccount("Alice", 100)
     acc2 = BankAccount("Bob", 50)
     acc1.deposit(50)
